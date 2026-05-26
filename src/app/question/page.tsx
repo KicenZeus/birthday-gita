@@ -27,7 +27,7 @@ export default function QuestionPage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#120909] flex items-center justify-center px-5">
       <FloatingHearts />
-      
+
       {/* BACKGROUND GLOW */}
       <div className="absolute inset-0 overflow-hidden">
 
@@ -54,12 +54,12 @@ export default function QuestionPage() {
       >
 
         <h1 className="text-white text-4xl md:text-5xl font-bold mb-5 leading-tight">
-          sayang kamu <br />
-          mau terus sama aku ga? ❤️
+          kamu sayang <br />
+          aku ga? ❤️
         </h1>
 
         <p className="text-gray-400 mb-16">
-          jawab yang jujur ya 😭
+          jawab yang jujur ya
         </p>
 
         <div className="relative flex items-center justify-center gap-8">
@@ -92,7 +92,7 @@ export default function QuestionPage() {
             onClick={moveButton}
             className="bg-white/10 border border-white/10 text-white px-10 py-4 rounded-2xl text-xl backdrop-blur-xl"
           >
-            tidak 😭
+            tidak 
           </motion.button>
 
         </div>
