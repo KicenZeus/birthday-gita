@@ -60,7 +60,7 @@ export default function LetterAnimation() {
       >
 
         <h2 className="text-2xl font-bold text-black mb-4">
-          for my love ❤️
+          for Sayangku ❤️
         </h2>
 
         <p className="text-black leading-7 text-sm">
@@ -68,7 +68,8 @@ export default function LetterAnimation() {
           semoga semua hal baik selalu datang ke hidup kamu ✨
           <br /><br />
           makasih udah jadi rumah ternyaman buat aku.
-          aku sayang banget sama kamu ❤️
+          sayang banget sama kamu 
+          Love You Sayangku❤️
         </p>
 
       </motion.div>

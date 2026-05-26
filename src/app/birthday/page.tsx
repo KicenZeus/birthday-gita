@@ -123,7 +123,7 @@ export default function BirthdayPage() {
           }}
           className="text-white text-5xl font-bold text-center mb-4"
         >
-          Happy Birthday ❤️
+          Happy Birthday Sayangku❤️
         </motion.h1>
 
         <motion.p
@@ -138,7 +138,7 @@ export default function BirthdayPage() {
           }}
           className="text-gray-300 text-center mb-16 max-w-md"
         >
-          buat cewe paling spesial yang selalu bikin hidup aku bahagia ✨
+          buat cewe paling spesial yang bikin hidup aku bahagia
         </motion.p>
 
         <LetterAnimation />

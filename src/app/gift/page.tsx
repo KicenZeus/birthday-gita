@@ -17,8 +17,8 @@ export default function GiftPage() {
 
   const [copied, setCopied] = useState("");
 
-  const email = "example@gmail.com";
-  const password = "yourpassword123";
+  const email = "amememories@ivdata.my.id";
+  const password = "GitaAmeylia27052005";
 
   const handleCopy = async (
     text: string,
@@ -143,7 +143,7 @@ export default function GiftPage() {
               </motion.button>
 
               <p className="text-gray-400 mt-10">
-                pencet kadonya sayang ❤️
+                pencet kadonya yang ❤️
               </p>
 
             </motion.div>

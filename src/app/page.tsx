@@ -16,7 +16,7 @@ export default function Home() {
     if (password === "26022026") {
       router.push("/question");
     } else {
-      alert("password salah 😭");
+      alert("Parah");
     }
   };
   useEffect(() => {
@@ -48,11 +48,11 @@ if (loading) {
       >
 
         <h1 className="text-white text-3xl font-bold text-center mb-3">
-          Secret Website ❤️
+          For Ur Birthday ❤️
         </h1>
 
         <p className="text-gray-400 text-center text-sm mb-8">
-          masukin tanggal jadian kita
+          tebak password
         </p>
 
         <input
@@ -67,7 +67,7 @@ if (loading) {
           onClick={handleLogin}
           className="w-full bg-red-700 hover:bg-red-600 transition-all text-white py-3 rounded-xl"
         >
-          masuk ❤️
+          masuk
         </button>
 
       </motion.div>

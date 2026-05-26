@@ -18,7 +18,7 @@ const songs = [
   },
   {
     title: "MBG",
-    file: "/music/song3.mp3",
+    file: "/music/song4.mp3",
   },
 ];
 
