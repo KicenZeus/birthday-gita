@@ -2,46 +2,35 @@
 
 import { motion } from "framer-motion";
 
+const ITEMS = ["❤️", "🩷", "💕", "💖", "✨", "🌹", "💝", "🫶", "🎀", "⭐"];
+
 export default function FloatingHearts() {
-
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-
-      {[...Array(20)].map((_, i) => {
-
-        const size = 12 + Math.random() * 20;
-
-        return (
-          <motion.div
-            key={i}
-            initial={{
-              y: "110%",
-              x: `${Math.random() * 100}%`,
-              opacity: 0,
-            }}
-            animate={{
-              y: "-10%",
-              opacity: [0, 0.7, 0],
-              x: `calc(${Math.random() * 100}% + ${
-                Math.random() * 100 - 50
-              }px)`,
-            }}
-            transition={{
-              duration: 8 + Math.random() * 5,
-              repeat: Infinity,
-              delay: i * 0.3,
-              ease: "linear",
-            }}
-            className="absolute text-red-500"
-            style={{
-              fontSize: `${size}px`,
-            }}
-          >
-            ❤️
-          </motion.div>
-        );
-      })}
-
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      {Array.from({ length: 14 }, (_, i) => (
+        <motion.div
+          key={i}
+          className="absolute text-lg select-none"
+          initial={{
+            x: `${(i * 7.3) % 95}vw`,
+            y: "110vh",
+            opacity: 0,
+            scale: 0.5 + (i % 3) * 0.25,
+          }}
+          animate={{
+            y: "-10vh",
+            opacity: [0, 0.55, 0.55, 0],
+          }}
+          transition={{
+            duration: 9 + (i % 4) * 2,
+            delay: i * 0.9,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          {ITEMS[i % ITEMS.length]}
+        </motion.div>
+      ))}
     </div>
   );
 }

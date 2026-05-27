@@ -1,255 +1,152 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-
-import {
-  Gift,
-  Sparkles,
-  Copy,
-  Check,
-} from "lucide-react";
-import FloatingHearts from "@/components/FloatingHearts";
+import MusicPlayer from "@/components/MusicPlayer";
 
 export default function GiftPage() {
-
+  const [mounted, setMounted] = useState(false);
   const [opened, setOpened] = useState(false);
-
   const [copied, setCopied] = useState("");
+  const router = useRouter();
 
-  const email = "amememories@ivdata.my.id";
-  const password = "GitaAmeylia27052005";
+  // ← DITAMBAH: auth check
+  useEffect(() => {
+    const auth = localStorage.getItem("birthday-auth");
+    if (!auth) {
+      router.push("/");
+      return;
+    }
+    setMounted(true);
+  }, [router]);
 
-  const handleCopy = async (
-    text: string,
-    type: string
-  ) => {
+  const email = "AmeMemories@yahut.io";       // ← GANTI
+  const password = "xxxxxxx";         // ← GANTI
 
+  const copyText = async (text: string, type: string) => {
     await navigator.clipboard.writeText(text);
-
     setCopied(type);
-
-    setTimeout(() => {
-      setCopied("");
-    }, 2000);
+    setTimeout(() => setCopied(""), 2000);
   };
 
+  if (!mounted) return null;
+
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#120909] flex items-center justify-center px-5">
-      <FloatingHearts />
-
-      {/* BACKGROUND */}
-      <div className="absolute inset-0 overflow-hidden">
-
-        <div className="absolute top-[-120px] left-[-120px] w-[350px] h-[350px] bg-red-700 opacity-20 blur-[140px]" />
-
-        <div className="absolute bottom-[-120px] right-[-120px] w-[350px] h-[350px] bg-pink-700 opacity-20 blur-[140px]" />
-
+    <main className="relative min-h-screen overflow-hidden bg-black flex items-center justify-center px-6">
+      {/* Background */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/photos/1.jpg"
+          alt=""
+          className="w-full h-full object-cover blur-xl scale-110 opacity-30"
+        />
+        <div className="absolute inset-0 bg-black/75" />
       </div>
 
-      {/* FLOATING SPARKLES */}
-      {opened && (
-        <>
-          {[...Array(15)].map((_, i) => (
-            <motion.div
-              key={i}
-              initial={{
-                opacity: 1,
-                scale: 0,
-                x: 0,
-                y: 0,
-              }}
-              animate={{
-                opacity: 0,
-                scale: 1.5,
-                x: (i % 2 === 0 ? 1 : -1) * (80 + i * 10),
-                y: -120 - i * 10,
-              }}
-              transition={{
-                duration: 1.5,
-              }}
-              className="absolute z-20"
-              style={{
-                left: "50%",
-                top: "50%",
-              }}
-            >
-              ✨
-            </motion.div>
-          ))}
-        </>
-      )}
+      <MusicPlayer />
 
-      {/* CONTENT */}
-      <div className="relative z-10 flex flex-col items-center text-center">
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center">
+        <motion.h1
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-4xl md:text-6xl font-bold text-white text-center mb-10"
+        >
+          special gift for u 🎁❤️
+        </motion.h1>
 
         <AnimatePresence mode="wait">
-
           {!opened ? (
-
             <motion.div
               key="giftbox"
-              exit={{
-                opacity: 0,
-                scale: 0.5,
-              }}
+              initial={{ scale: 0.7, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0, opacity: 0, rotate: 15 }}
+              transition={{ duration: 0.5 }}
+              onClick={() => setOpened(true)}
+              className="cursor-pointer"
             >
-
-              {/* TITLE */}
-              <motion.h1
-                initial={{
-                  opacity: 0,
-                  y: -30,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                className="text-white text-4xl font-bold mb-10"
+              {/* Bouncing dipisah ke div dalam biar ga ganggu exit */}
+              <motion.div
+                animate={{ y: [0, -15, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
               >
-                ada hadiah buat kamu 🎁
-              </motion.h1>
-
-              {/* GIFT BOX */}
-              <motion.button
-                animate={{
-                  y: [0, -12, 0],
-                  scale: [1, 1.05, 1],
-                  rotate: [0, 2, -2, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                }}
-                whileTap={{
-                  scale: 0.9,
-                }}
-                onClick={() => setOpened(true)}
-                className="relative"
-              >
-
-                {/* GLOW */}
-                <div className="absolute inset-0 bg-red-700 blur-[60px] opacity-50 rounded-full" />
-
-                <div className="relative w-40 h-40 rounded-[40px] bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center shadow-2xl">
-
-                  <Gift
-                    size={70}
-                    className="text-white"
-                  />
-
+                <div className="relative">
+                  <div className="absolute inset-0 bg-red-500 blur-[120px] opacity-50" />
+                  <div className="relative w-[220px] h-[220px] bg-gradient-to-br from-red-700 to-red-900 rounded-3xl shadow-[0_0_60px_rgba(255,0,0,0.5)] flex items-center justify-center">
+                    <div className="absolute w-10 h-full bg-red-300/40" />
+                    <div className="absolute h-10 w-full bg-red-300/40" />
+                    <div className="absolute -top-8 flex gap-2">
+                      <div className="w-14 h-14 border-[10px] border-red-300 rounded-full" />
+                      <div className="w-14 h-14 border-[10px] border-red-300 rounded-full" />
+                    </div>
+                    <motion.span
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                      className="text-white text-2xl font-bold"
+                    >
+                      tap me 💌
+                    </motion.span>
+                  </div>
                 </div>
-
-              </motion.button>
-
-              <p className="text-gray-400 mt-10">
-                pencet kadonya yang ❤️
-              </p>
-
+              </motion.div>
             </motion.div>
-
           ) : (
-
             <motion.div
-              key="openedgift"
-              initial={{
-                opacity: 0,
-                scale: 0.7,
-                y: 40,
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: 0.7,
-              }}
-              className="w-full max-w-md bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-8"
+              key="content"
+              initial={{ opacity: 0, scale: 0.7, y: 100 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 w-full max-w-md shadow-[0_0_60px_rgba(255,0,0,0.25)]"
             >
+              <h2 className="text-white text-3xl font-bold text-center mb-8">
+                akun spesial buat kamu ❤️
+              </h2>
 
-              <Sparkles
-                className="text-red-400 mx-auto mb-5"
-                size={50}
-              />
-
-              <h1 className="text-white text-3xl font-bold mb-5">
-                surpriseee ❤️
-              </h1>
-
-              <p className="text-gray-300 leading-8 mb-8">
-                ini hadiah kecil buat kamu ✨
-                semoga kamu suka ya sayang 😭❤️
-              </p>
-
-              {/* EMAIL */}
-              <div className="bg-black/40 rounded-2xl p-5 border border-white/10 text-left mb-5">
-
-                <p className="text-red-400 text-sm mb-2">
-                  email:
-                </p>
-
-                <div className="flex items-center justify-between gap-3">
-
-                  <p className="text-white break-all">
-                    {email}
-                  </p>
-
+              {/* Email */}
+              <div className="mb-6">
+                <p className="text-red-300 mb-2 text-sm">email</p>
+                <div className="flex items-center justify-between gap-3 bg-black/30 rounded-2xl p-4">
+                  <span className="text-white break-all text-sm">{email}</span>
                   <button
-                    onClick={() =>
-                      handleCopy(email, "email")
-                    }
-                    className="text-white"
+                    onClick={() => copyText(email, "email")}
+                    className="bg-red-700 hover:bg-red-600 px-4 py-2 rounded-xl text-white text-sm transition-all shrink-0"
                   >
-                    {copied === "email" ? (
-                      <Check size={18} />
-                    ) : (
-                      <Copy size={18} />
-                    )}
+                    {copied === "email" ? "copied! ✓" : "copy"}
                   </button>
-
                 </div>
-
               </div>
 
-              {/* PASSWORD */}
-              <div className="bg-black/40 rounded-2xl p-5 border border-white/10 text-left">
-
-                <p className="text-red-400 text-sm mb-2">
-                  password:
-                </p>
-
-                <div className="flex items-center justify-between gap-3">
-
-                  <p className="text-white break-all">
-                    {password}
-                  </p>
-
+              {/* Password */}
+              <div className="mb-8">
+                <p className="text-red-300 mb-2 text-sm">password</p>
+                <div className="flex items-center justify-between gap-3 bg-black/30 rounded-2xl p-4">
+                  <span className="text-white break-all text-sm">{password}</span>
                   <button
-                    onClick={() =>
-                      handleCopy(password, "password")
-                    }
-                    className="text-white"
+                    onClick={() => copyText(password, "password")}
+                    className="bg-red-700 hover:bg-red-600 px-4 py-2 rounded-xl text-white text-sm transition-all shrink-0"
                   >
-                    {copied === "password" ? (
-                      <Check size={18} />
-                    ) : (
-                      <Copy size={18} />
-                    )}
+                    {copied === "password" ? "copied! ✓" : "copy"}
                   </button>
-
                 </div>
-
               </div>
 
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="text-center text-white/80 leading-relaxed"
+              >
+                panjang umur, sehat selalu
+                <br />
+                semoga kamu suka ya sayang ❤️
+              </motion.p>
             </motion.div>
-
           )}
-
         </AnimatePresence>
-
       </div>
-
     </main>
   );
 }
